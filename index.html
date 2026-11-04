@@ -1,13 +1,89 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>chic-outfit</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hilwa Hilyatun Niswah</title>
+  <style>
+    :root {
+      --bg: #fff5f6;
+      --text: #3a2230;
+      --muted: #7d6370;
+      --line: #f3cfd6;
+      --accent: #d9577a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #2a1a22;
+        --text: #fbe9ee;
+        --muted: #c9a9b5;
+        --line: #4d3340;
+        --accent: #f28aa6;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0 auto;
+      max-width: 560px;
+      padding: 64px 24px 48px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    h1 { margin: 0 0 4px; font-size: 1.9rem; line-height: 1.2; }
+    .nim { margin: 0; color: var(--muted); }
+    .intro { margin: 20px 0 40px; }
+    h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { padding: 18px 0; border-top: 1px solid var(--line); }
+    li:last-child { border-bottom: 1px solid var(--line); }
+    li h3 { margin: 0; font-size: 1.05rem; }
+    li p { margin: 2px 0 8px; color: var(--muted); }
+    a { color: var(--accent); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .links a + a { margin-left: 16px; }
+    footer { margin-top: 40px; color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hilwa Hilyatun Niswah</h1>
+    <p class="nim">NIM 1247050030</p>
+    <p class="intro">Mahasiswa Teknik Informatika UIN Sunan Gunung Djati Bandung. Di sini saya mengumpulkan tugas dan proyek kuliah Pengembangan Aplikasi Web.</p>
+  </header>
+
+  <main>
+    <h2>Proyek</h2>
+    <ul>
+      <li>
+        <h3>ChicOutfit</h3>
+        <p>Aplikasi web interaktif katalog pakaian berbasis React dan Vite.</p>
+        <div class="links">
+          <a href="https://chicoutfit.byhilwa.my.id/katalog" target="_blank">Buka aplikasi</a>
+          <a href="https://github.com/hlwnswh/chic-outfit" target="_blank">Source code</a>
+        </div>
+      </li>
+      <li>
+        <h3>StudyTask</h3>
+        <p>Dashboard tugas kuliah dengan React dan Vite (Tugas Pertemuan 7).</p>
+        <div class="links">
+          <a href="https://studytask.byhilwa.my.id/">Buka aplikasi</a>
+          <a href="https://github.com/hlwnswh/studytask">Source code</a>
+        </div>
+      </li>
+      <li>
+        <h3>Taskly</h3>
+        <p>Aplikasi daftar tugas kuliah dengan TypeScript dan Vite (Tugas Pertemuan 6).</p>
+        <div class="links">
+          <a href="https://taskly.byhilwa.my.id/">Buka aplikasi</a>
+          <a href="https://github.com/hlwnswh/taskly">Source code</a>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <footer>byhilwa.my.id</footer>
+</body>
 </html>
