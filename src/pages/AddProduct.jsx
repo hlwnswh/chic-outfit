@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import useProducts from '../hooks/useProducts'; // Panggil hook produk
 
 export default function AddProduct() {
+  const { products, setProducts } = useProducts(); // Ambil daftar produk dan fungsi penyimpanannya
   const [formData, setFormData] = useState({ title: '', price: '', category: "women's clothing", description: '', image: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -27,6 +29,21 @@ export default function AddProduct() {
       setErrors(validationErrors);
     } else {
       setErrors({});
+
+      // 1. Buat objek produk baru dengan ID yang unik (pakai timestamp)
+      const newProduct = {
+        id: Date.now(),
+        title: formData.title,
+        price: Number(formData.price),
+        category: formData.category,
+        description: formData.description,
+        image: formData.image
+      };
+
+      // 2. Tambahkan ke dalam array produk yang ada & simpan ke localStorage
+      const updatedProducts = [newProduct, ...products];
+      setProducts(updatedProducts);
+
       setSubmitted(true);
       setFormData({ title: '', price: '', category: "women's clothing", description: '', image: '' });
       setTimeout(() => setSubmitted(false), 4000);
@@ -42,7 +59,7 @@ export default function AddProduct() {
 
       {submitted && (
         <div style={{ padding: '1rem', backgroundColor: '#dcfce7', color: '#15803d', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
-          <CheckCircle2 size={20} /> Produk berhasil ditambahkan!
+          <CheckCircle2 size={20} /> Produk berhasil ditambahkan dan disimpan secara permanen!
         </div>
       )}
 

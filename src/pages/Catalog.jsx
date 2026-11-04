@@ -1,36 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { fetchProducts } from '../services/api';
+import React, { useState } from 'react';
+import useProducts from '../hooks/useProducts'; // Menggunakan hook yang sudah ada localStorage-nya
 import ProductCard from '../components/ProductCard';
 import { Loader, Trash2, Search } from 'lucide-react';
 
 export default function Catalog() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Mengambil data, fungsi setProducts, dan status loading dari hook useProducts
+  const { products, setProducts, loading } = useProducts();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Semua');
   const [sortBy, setSortBy] = useState('default');
 
-  // Ambil data produk saat pertama kali halaman dibuka
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch (err) {
-        console.error("Gagal memuat produk");
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
-
-  // Fungsi untuk menghapus produk berdasarkan ID
+  // Fungsi untuk menghapus produk berdasarkan ID (otomatis tersimpan ke localStorage)
   const handleDeleteProduct = (id) => {
     const confirmed = window.confirm("Apakah kamu yakin ingin menghapus outfit ini dari katalog?");
     if (confirmed) {
-      setProducts(products.filter(item => item.id !== id));
+      const updatedProducts = products.filter(item => item.id !== id);
+      setProducts(updatedProducts); // Ini akan otomatis memperbarui state & localStorage
     }
   };
 
