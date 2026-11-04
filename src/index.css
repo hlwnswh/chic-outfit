@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #e4eee3 0%, #f4f6ef 50%, #dcebf2 100%) !important;
+  color: #34453d;
+  min-height: 100vh;
+}
+
+/* Layout Utama */
+.app {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar yang Lebih Lebar & Rapi */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  min-height: 100vh;
+  padding: 30px 22px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(245, 242, 232, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid #d8e2d4;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #c8dfd1, #d6e9f4);
+  font-size: 22px;
+}
+
+.logo h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #34453d;
+}
+
+.logo p {
+  font-size: 11px;
+  color: #87918a;
+}
+
+.menu-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #98a39a;
+  margin: 0 0 12px 10px;
+}
+
+/* Perbaikan Nav Link agar Sejajar Samping dengan Sempurna */
+.nav-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  text-decoration: none !important;
+  color: #66736a !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  transition: .2s ease;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: linear-gradient(110deg, #d8e8d5, #e0edf3) !important;
+  color: #405d4b !important;
+}
+
+.profile-card {
+  margin-top: auto;
+  padding: 16px;
+  text-align: center;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #d8e2d4;
+}
+
+.profile-card h4 {
+  font-size: 13px;
+  color: #34453d;
+}
+
+.profile-card p {
+  color: #87918a;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Konten Kanan */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 35px;
+}
