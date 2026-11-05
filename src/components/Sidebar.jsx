@@ -1,0 +1,97 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useFavorites } from '../context/FavoriteContext';
+import { Heart, PlusCircle, Home, Layers, Menu, X } from 'lucide-react';
+
+export default function Sidebar() {
+  const { favorites } = useFavorites();
+  const location = useLocation();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <>
+      <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Menu">
+        {open ? <X size={22} /> : <Menu size={22} />}
+      </button>
+
+      {open && <div className="overlay" onClick={() => setOpen(false)} />}
+
+      <aside className={`sidebar ${open ? 'open' : ''}`}>
+        <div className="logo">
+          <div className="logo-icon">✨</div>
+          <div>
+            <h2>ChicOutfit</h2>
+            <p>by Hilwa Hilyatun Niswah</p>
+          </div>
+        </div>
+
+        <div className="menu-title">MENU UTAMA</div>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <Link
+            to="/"
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '15px' }}
+          >
+            <Home size={20} />
+            <span>Beranda</span>
+          </Link>
+
+          <Link
+            to="/katalog"
+            className={`nav-link ${location.pathname.startsWith('/katalog') ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '15px' }}
+          >
+            <Layers size={20} />
+            <span>Katalog</span>
+          </Link>
+
+          <Link
+            to="/tambah"
+            className={`nav-link ${location.pathname === '/tambah' ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', gap: '15px' }}
+          >
+            <PlusCircle size={20} />
+            <span>Tambah Produk</span>
+          </Link>
+
+          <Link
+            to="/favorit"
+            className={`nav-link ${location.pathname === '/favorit' ? 'active' : ''}`}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <Heart size={20} />
+              <span>Favorit</span>
+            </div>
+            {favorites.length > 0 && (
+              <span
+                style={{
+                  background: '#829d7c',
+                  color: 'white',
+                  borderRadius: '50%',
+                  width: '22px',
+                  height: '22px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 'bold',
+                }}
+              >
+                {favorites.length}
+              </span>
+            )}
+          </Link>
+        </nav>
+
+        <div className="profile-card" style={{ marginTop: 'auto' }}>
+          <h4>Koleksi Eksklusif</h4>
+        </div>
+      </aside>
+    </>
+  );
+}

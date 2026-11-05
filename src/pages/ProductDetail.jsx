@@ -1,30 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchProductById } from '../services/api';
+import useProducts from '../hooks/useProducts';
 import { useFavorites } from '../context/FavoriteContext';
 import { ArrowLeft, Heart, Star, ShoppingBag, Loader } from 'lucide-react';
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { products, loading, error } = useProducts();
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  useEffect(() => {
-    const getDetail = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchProductById(id);
-        setProduct(data);
-      } catch (err) {
-        setError('Gagal memuat detail produk.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    getDetail();
-  }, [id]);
+  const product = products.find((p) => p.id === Number(id));
 
   // Harga di data sudah dalam Rupiah, jadi tidak perlu dikali kurs lagi
   const formatRupiah = (harga) => {
@@ -35,7 +20,7 @@ export default function ProductDetail() {
     }).format(harga);
   };
 
-  if (loading) {
+  if (loading && !product) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '5rem', color: '#849b88', gap: '0.5rem' }}>
         <Loader size={28} className="animate-spin" /> Memuat detail outfit...
@@ -43,7 +28,7 @@ export default function ProductDetail() {
     );
   }
 
-  if (error || !product) {
+  if (!product) {
     return (
       <div style={{ padding: '3rem', textAlign: 'center' }}>
         <p>{error || 'Produk tidak ditemukan.'}</p>
