@@ -9,6 +9,7 @@ import ProductDetail from './pages/ProductDetail';
 import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
 import Favorites from './pages/Favorites';
+import Ekspor from './pages/Ekspor';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Routes>
             {/* Route induk: semua halaman tampil di dalam Layout */}
             <Route element={<Layout />}>
+            <Route path="*" element={<h2 style={{ padding: 16 }}>Halaman tidak ditemukan</h2>} />
               <Route path="/" element={<HomeView />} />
 
               {/* Nested route: /katalog dan /katalog/:id */}
@@ -29,6 +31,7 @@ export default function App() {
               <Route path="tambah" element={<AddProduct />} />
               <Route path="edit/:id" element={<EditProduct />} />
               <Route path="favorit" element={<Favorites />} />
+              <Route path="ekspor" element={<Ekspor />} />
             </Route>
           </Routes>
         </Router>
