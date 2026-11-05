@@ -1,16 +1,48 @@
-# React + Vite
+# ChicOutfit
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplikasi katalog pakaian berbasis React yang menampilkan data dari public API. Dibuat sebagai tugas individu materi React Routing, State Management, Data Fetching, dan Application Architecture.
 
-Currently, two official plugins are available:
+- Website: https://chicoutfit.byhilwa.my.id/
+- Repository: https://github.com/hlwnswh/chic-outfit
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Teknologi
+React, React Router, Vite, JavaScript, Context API, DummyJSON API
 
-## React Compiler
+## Fitur
+- Katalog outfit dengan search, filter kategori, sorting, dan pagination
+- Halaman detail produk berdasarkan ID di URL
+- Tambah, edit, dan hapus produk (tersimpan di localStorage)
+- Favorit (tersimpan di localStorage)
+- Form dengan validasi input
+- Loading, pesan error (dengan tombol coba lagi), dan empty state
+- Halaman 404
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Routing
+Memakai React Router dengan client-side routing, jadi pindah halaman tanpa reload penuh.
+- `/` : beranda
+- `/katalog` : daftar produk
+- `/katalog/:id` : detail produk (dynamic route)
+- `/tambah` : form tambah produk
+- `/edit/:id` : form edit produk (dynamic route)
+- `/favorit` : daftar favorit
+- `*` : halaman 404
 
-## Expanding the Oxlint configuration
+Semua halaman berada di dalam `Layout` (nested route) yang menampilkan isi halaman lewat `<Outlet />`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## State Management
+- **Local state**: `useState` untuk kondisi komponen dan input form.
+- **Global state**: Context API lewat `ProductContext` (data produk) dan `FavoriteContext` (favorit).
+- **Server state**: data produk diambil dari API dan dikelola di `ProductContext` (loading, error, data).
+- **URL state**: search, kategori, urutan, dan halaman disimpan di URL lewat `useSearchParams` (contoh: `/katalog?q=kemeja&urut=lowest&hal=2`).
+- **Form state**: controlled components dengan validasi di halaman tambah dan edit produk.
+
+## Data Fetching
+Data diambil dari DummyJSON (`https://dummyjson.com/products/category/...`) memakai `fetch`. Kode pemanggilan API dipisah di `src/services/productService.js`. Aplikasi menangani tiga kondisi: loading, error, dan data kosong.
+
+## Custom Hook
+- `useProducts`: mengambil data dan fungsi produk dari `ProductContext`.
+
+## Reusable Components
+`ProductCard`, `Layout`, `Sidebar`, `Pagination`, `FormField`
+
+## Struktur Folder
