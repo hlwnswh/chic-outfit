@@ -1,17 +1,30 @@
 import { useState } from 'react';
 
+const bacaSemua = () => {
+  try {
+    const hasil = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      hasil[key] = localStorage.getItem(key);
+    }
+    return Object.keys(hasil).length
+      ? JSON.stringify(hasil, null, 2)
+      : 'Tidak ada data di browser ini.';
+  } catch {
+    return 'Gagal membaca penyimpanan browser.';
+  }
+};
+
 export default function Ekspor() {
   const [tersalin, setTersalin] = useState(false);
-  const data =
-    localStorage.getItem('chic_outfit_overrides_v1') ||
-    'Tidak ada data di browser ini.';
+  const data = bacaSemua();
 
   const handleSalin = async () => {
     try {
       await navigator.clipboard.writeText(data);
       setTersalin(true);
     } catch {
-      // kalau gagal, data bisa disalin manual dari kotak teks
+      // kalau gagal, salin manual dari kotak teks
     }
   };
 
