@@ -7,15 +7,13 @@ export default function ProductCard({ product }) {
   const { toggleFavorite, isFavorite } = useFavorites();
   const favorite = isFavorite(product.id);
 
-  // Konversi harga dari USD ke Rupiah (Kurs perkiraan: 1 USD = Rp 16.000)
-  const formatRupiah = (priceInUSD) => {
-    const rate = 16000;
-    const priceInIDR = priceInUSD * rate;
+  // Harga di data sudah dalam Rupiah, jadi tidak perlu dikali kurs lagi
+  const formatRupiah = (harga) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
       maximumFractionDigits: 0
-    }).format(priceInIDR);
+    }).format(harga);
   };
 
   return (
@@ -31,12 +29,12 @@ export default function ProductCard({ product }) {
       transition: 'transform 0.2s ease',
     }}>
       <div style={{ position: 'relative', height: '220px', backgroundColor: '#fdfefe', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <img 
-          src={product.image} 
-          alt={product.title} 
-          style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} 
+        <img
+          src={product.image}
+          alt={product.title}
+          style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
         />
-        <button 
+        <button
           onClick={() => toggleFavorite(product)}
           style={{
             position: 'absolute',
@@ -50,7 +48,8 @@ export default function ProductCard({ product }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            cursor: 'pointer'
           }}
         >
           <Heart size={18} color={favorite ? "#db2777" : "#849b88"} fill={favorite ? "#db2777" : "none"} />
@@ -68,7 +67,7 @@ export default function ProductCard({ product }) {
           <span style={{ fontSize: '1rem', fontWeight: 'bold', color: '#3a4a3d' }}>
             {formatRupiah(product.price)}
           </span>
-          <Link 
+          <Link
             to={`/katalog/${product.id}`}
             style={{
               backgroundColor: '#e3ebdf',

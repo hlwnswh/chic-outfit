@@ -1,51 +1,38 @@
-import { useState, useEffect } from 'react';
-import { fetchProducts } from '../services/api';
+import { useState, useEffect, useCallback } from 'react';
+import { ambilProduk, simpanProduk, customOutfitProducts } from '../services/api';
 
 export default function useProducts() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProductsState] = useState(() => ambilProduk());
   const [error, setError] = useState(null);
 
-  // 1. Saat pertama kali dibuka, cek apakah ada data tersimpan di localStorage
+  // Setiap daftar produk berubah, langsung disimpan ke localStorage
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        setLoading(true);
-        const savedProducts = localStorage.getItem('chic_outfit_products');
-        
-        if (savedProducts) {
-          // Jika ada data di localStorage (hasil hapus/tambah sebelumnya), pakai itu
-          setProducts(JSON.parse(savedProducts));
-        } else {
-          // Jika belum ada, ambil dari API/data awal lalu simpan ke localStorage
-          const data = await fetchProducts();
-          setProducts(data);
-          localStorage.setItem('chic_outfit_products', JSON.stringify(data));
-        }
-        setError(null);
-      } catch (err) {
-        setError(err.message || 'Terjadi kesalahan saat mengambil data.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    const berhasil = simpanProduk(products);
+    setError(berhasil ? null : 'Gagal menyimpan ke penyimpanan browser.');
+  }, [products]);
 
-    getProducts();
+  const setProducts = useCallback((nilai) => {
+    setProductsState((prev) => (typeof nilai === 'function' ? nilai(prev) : nilai));
   }, []);
 
-  // 2. Fungsi pembantu untuk menyimpan perubahan produk (tambah/hapus) agar permanen
-  const updateProducts = (newProducts) => {
-    setProducts(newProducts);
-    localStorage.setItem('chic_outfit_products', JSON.stringify(newProducts));
-  };
+  const addProduct = useCallback((produkBaru) => {
+    const produk = {
+      rating: { rate: 0, count: 0 },
+      ...produkBaru,
+      id: Date.now(),
+      price: Number(produkBaru.price),
+    };
+    setProductsState((prev) => [produk, ...prev]);
+    return produk;
+  }, []);
 
-  // 3. Fungsi opsional untuk mereset kembali ke data awal dari API jika diperlukan
-  const resetProducts = async () => {
-    localStorage.removeItem('chic_outfit_products');
-    const data = await fetchProducts();
-    setProducts(data);
-    localStorage.setItem('chic_outfit_products', JSON.stringify(data));
-  };
+  const deleteProduct = useCallback((id) => {
+    setProductsState((prev) => prev.filter((item) => item.id !== Number(id)));
+  }, []);
 
-  return { products, setProducts: updateProducts, loading, error, resetProducts };
+  const resetProducts = useCallback(() => {
+    setProductsState(customOutfitProducts);
+  }, []);
+
+  return { products, setProducts, addProduct, deleteProduct, resetProducts, loading: false, error };
 }

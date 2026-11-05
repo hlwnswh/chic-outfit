@@ -1,5 +1,10 @@
-// Data produk lokal dengan gambar produk fashion yang stabil dan relevan
-const customOutfitProducts = [
+// src/services/api.js
+ 
+// Kunci localStorage, dipakai juga oleh hooks/useProducts.js
+export const STORAGE_KEY = 'chic_outfit_products';
+ 
+// Data produk awal (hanya dipakai kalau localStorage belum pernah diisi / saat reset)
+export const customOutfitProducts = [
   // --- 1. BAJU (5 Item) ---
   {
     id: 1,
@@ -46,7 +51,7 @@ const customOutfitProducts = [
     image: "https://images.pexels.com/photos/45982/pexels-photo-45982.jpeg?auto=compress&cs=tinysrgb&w=500",
     rating: { rate: 4.9, count: 110 }
   },
-
+ 
   // --- 2. CELANA (5 Item) ---
   {
     id: 6,
@@ -93,7 +98,7 @@ const customOutfitProducts = [
     image: "https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=500",
     rating: { rate: 4.8, count: 90 }
   },
-
+ 
   // --- 3. SANDAL & SEPATU (5 Item) ---
   {
     id: 11,
@@ -140,7 +145,7 @@ const customOutfitProducts = [
     image: "https://images.pexels.com/photos/1478477/pexels-photo-1478477.jpeg?auto=compress&cs=tinysrgb&w=500",
     rating: { rate: 4.8, count: 130 }
   },
-
+ 
   // --- 4. ROK (5 Item) ---
   {
     id: 16,
@@ -187,7 +192,7 @@ const customOutfitProducts = [
     image: "https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&w=500",
     rating: { rate: 4.5, count: 70 }
   },
-
+ 
   // --- 5. JAKET (5 Item) ---
   {
     id: 21,
@@ -235,13 +240,46 @@ const customOutfitProducts = [
     rating: { rate: 4.6, count: 125 }
   }
 ];
-
-export const fetchProducts = async () => {
-  return customOutfitProducts;
+ 
+// ---------- Helper localStorage ----------
+ 
+// Mengembalikan array produk yang tersimpan, atau null kalau belum pernah disimpan / datanya rusak.
+// Catatan: array kosong [] dianggap data VALID (artinya katalog sengaja dikosongkan).
+export const bacaProdukTersimpan = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === null) return null;
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
 };
-
+ 
+// Menyimpan array produk ke localStorage. Mengembalikan true kalau berhasil.
+export const simpanProduk = (daftar) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(daftar));
+    return true;
+  } catch {
+    return false; // misalnya penyimpanan penuh
+  }
+};
+ 
+// Daftar produk yang sedang berlaku: data tersimpan kalau ada, kalau tidak data awal.
+export const ambilProduk = () => {
+  const tersimpan = bacaProdukTersimpan();
+  return tersimpan !== null ? tersimpan : customOutfitProducts;
+};
+ 
+// ---------- API ----------
+ 
+export const fetchProducts = async () => {
+  return ambilProduk();
+};
+ 
 export const fetchProductById = async (id) => {
-  const product = customOutfitProducts.find((item) => item.id === Number(id));
+  const product = ambilProduk().find((item) => item.id === Number(id));
   if (!product) {
     throw new Error('Produk tidak ditemukan.');
   }

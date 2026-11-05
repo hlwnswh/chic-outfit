@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import useProducts from '../hooks/useProducts'; // Panggil hook produk
+import useProducts from '../hooks/useProducts';
+
+const KATEGORI_AWAL = 'Pakaian Wanita';
+const FORM_KOSONG = { title: '', price: '', category: KATEGORI_AWAL, description: '', image: '' };
 
 export default function AddProduct() {
-  const { products, setProducts } = useProducts(); // Ambil daftar produk dan fungsi penyimpanannya
-  const [formData, setFormData] = useState({ title: '', price: '', category: "women's clothing", description: '', image: '' });
+  const { addProduct } = useProducts(); // addProduct otomatis memberi id unik & menyimpan ke localStorage
+  const [formData, setFormData] = useState(FORM_KOSONG);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,27 +30,23 @@ export default function AddProduct() {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-    } else {
-      setErrors({});
-
-      // 1. Buat objek produk baru dengan ID yang unik (pakai timestamp)
-      const newProduct = {
-        id: Date.now(),
-        title: formData.title,
-        price: Number(formData.price),
-        category: formData.category,
-        description: formData.description,
-        image: formData.image
-      };
-
-      // 2. Tambahkan ke dalam array produk yang ada & simpan ke localStorage
-      const updatedProducts = [newProduct, ...products];
-      setProducts(updatedProducts);
-
-      setSubmitted(true);
-      setFormData({ title: '', price: '', category: "women's clothing", description: '', image: '' });
-      setTimeout(() => setSubmitted(false), 4000);
+      return;
     }
+
+    setErrors({});
+
+    // Tambah produk baru (id, rating awal, dan penyimpanan ditangani oleh hook)
+    addProduct({
+      title: formData.title.trim(),
+      price: formData.price,
+      category: formData.category,
+      description: formData.description.trim(),
+      image: formData.image.trim()
+    });
+
+    setSubmitted(true);
+    setFormData(FORM_KOSONG);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   return (
@@ -96,9 +95,12 @@ export default function AddProduct() {
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #e2e8df', outline: 'none', backgroundColor: 'white' }}
             >
-              <option value="women's clothing">Pakaian Wanita</option>
-              <option value="men's clothing">Pakaian Pria</option>
-              <option value="jewelery">Aksesoris</option>
+              <option value="Pakaian Wanita">Pakaian Wanita</option>
+              <option value="Pakaian Pria">Pakaian Pria</option>
+              <option value="Celana">Celana</option>
+              <option value="Sandal & Sepatu">Sandal & Sepatu</option>
+              <option value="Rok">Rok</option>
+              <option value="Jaket">Jaket</option>
             </select>
           </div>
         </div>
@@ -110,7 +112,7 @@ export default function AddProduct() {
             value={formData.image}
             onChange={(e) => setFormData({ ...formData, image: e.target.value })}
             style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: errors.image ? '1px solid #ef4444' : '1px solid #e2e8df', outline: 'none' }}
-            placeholder="https://fakestoreapi.com/img/..."
+            placeholder="https://images.pexels.com/photos/..."
           />
           {errors.image && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.25rem', display: 'inline-block' }}>{errors.image}</span>}
         </div>
@@ -127,7 +129,7 @@ export default function AddProduct() {
           {errors.description && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.25rem', display: 'inline-block' }}>{errors.description}</span>}
         </div>
 
-        <button type="submit" style={{ backgroundColor: '#849b88', color: 'white', padding: '0.85rem', borderRadius: '10px', border: 'none', fontWeight: 600, fontSize: '1rem', marginTop: '0.5rem' }}>
+        <button type="submit" style={{ backgroundColor: '#849b88', color: 'white', padding: '0.85rem', borderRadius: '10px', border: 'none', fontWeight: 600, fontSize: '1rem', marginTop: '0.5rem', cursor: 'pointer' }}>
           Simpan Produk
         </button>
       </form>

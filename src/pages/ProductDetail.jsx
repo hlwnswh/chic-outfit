@@ -26,14 +26,13 @@ export default function ProductDetail() {
     getDetail();
   }, [id]);
 
-  const formatRupiah = (priceInUSD) => {
-    const rate = 16000;
-    const priceInIDR = priceInUSD * rate;
+  // Harga di data sudah dalam Rupiah, jadi tidak perlu dikali kurs lagi
+  const formatRupiah = (harga) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
       maximumFractionDigits: 0
-    }).format(priceInIDR);
+    }).format(harga);
   };
 
   if (loading) {
@@ -80,7 +79,7 @@ export default function ProductDetail() {
             {product.category}
           </span>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#2d372e' }}>{product.title}</h1>
-          
+
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#f59e0b', fontSize: '0.9rem' }}>
             <Star size={18} fill="#f59e0b" />
             <span>{product.rating?.rate || '4.5'}</span>
@@ -105,7 +104,8 @@ export default function ProductDetail() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                fontWeight: 600
+                fontWeight: 600,
+                cursor: 'pointer'
               }}
             >
               <Heart size={20} fill={favorite ? "#db2777" : "none"} color={favorite ? "#db2777" : "#849b88"} />
@@ -123,7 +123,8 @@ export default function ProductDetail() {
               alignItems: 'center',
               gap: '0.5rem',
               flexGrow: 1,
-              justifyContent: 'center'
+              justifyContent: 'center',
+              cursor: 'pointer'
             }}>
               <ShoppingBag size={20} /> Beli Sekarang
             </button>

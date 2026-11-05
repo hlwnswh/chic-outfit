@@ -1,9 +1,31 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const FavoriteContext = createContext();
 
+const FAV_KEY = 'chic_outfit_favorites';
+
+const bacaFavorit = () => {
+  try {
+    const saved = localStorage.getItem(FAV_KEY);
+    if (!saved) return [];
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
 export const FavoriteProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(bacaFavorit);
+
+  // Setiap favorit berubah, langsung disimpan
+  useEffect(() => {
+    try {
+      localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
+    } catch {
+      // abaikan kalau penyimpanan penuh
+    }
+  }, [favorites]);
 
   const toggleFavorite = (product) => {
     setFavorites((prevFavorites) => {

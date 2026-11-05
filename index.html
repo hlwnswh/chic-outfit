@@ -1,70 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChicOutfit - Katalog Pakaian</title>
-  <style>
-    :root {
-      --bg: #fff5f6;
-      --text: #3a2230;
-      --muted: #7d6370;
-      --line: #f3cfd6;
-      --accent: #d9577a;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #2a1a22;
-        --text: #fbe9ee;
-        --muted: #c9a9b5;
-        --line: #4d3340;
-        --accent: #f28aa6;
-      }
-    }
-    * { box-sizing: border-box; }
-    html { background: var(--bg); }
-    body {
-      margin: 0 auto;
-      max-width: 600px;
-      padding: 64px 24px 48px;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
-      color: var(--text);
-      background: var(--bg);
-    }
-    h1 { margin: 0 0 8px; font-size: 1.9rem; line-height: 1.2; }
-    .subtitle { margin: 0 0 24px; color: var(--muted); font-size: 1.05rem; }
-    .card {
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-    @media (prefers-color-scheme: dark) {
-      .card { background: rgba(0, 0, 0, 0.2); }
-    }
-    h2 { margin: 0 0 12px; font-size: 1.2rem; }
-    p { margin: 0 0 16px; color: var(--muted); }
-    a { color: var(--accent); text-decoration: none; font-weight: 500; }
-    a:hover { text-decoration: underline; }
-    footer { margin-top: 40px; color: var(--muted); font-size: .9rem; text-align: center; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>ChicOutfit</h1>
-    <p class="subtitle">Aplikasi web interaktif katalog pakaian berbasis React dan Vite.</p>
-  </header>
-
-  <main>
-    <div class="card">
-      <h2>Tentang Proyek</h2>
-      <p>ChicOutfit adalah platform katalog dan pilihan busana interaktif yang dirancang untuk memudahkan pengguna menemukan inspirasi gaya pakaian terbaik.</p>
-      <a href="https://github.com/hlwnswh/chic-outfit" target="_blank">Lihat Source Code di GitHub</a>
-    </div>
-  </main>
-
-  <footer>&copy; 2026 ChicOutfit &bull; byhilwa.my.id</footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChicOutfit - Katalog Pakaian</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

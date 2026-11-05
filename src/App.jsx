@@ -6,6 +6,7 @@ import HomeView from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
 import AddProduct from './pages/AddProduct';
+import EditProduct from './pages/EditProduct';
 import Favorites from './pages/Favorites';
 
 function SidebarNavbar() {
@@ -114,6 +115,7 @@ export default function App() {
               <Route path="/katalog/:id" element={<ProductDetail />} />
               <Route path="/tambah" element={<AddProduct />} />
               <Route path="/favorit" element={<Favorites />} />
+              <Route path="/edit/:id" element={<EditProduct />} />
             </Routes>
           </main>
         </div>
