@@ -5,239 +5,178 @@ export const STORAGE_KEY = 'chic_outfit_products';
  
 // Data produk awal (hanya dipakai kalau localStorage belum pernah diisi / saat reset)
 export const customOutfitProducts = [
-  // --- 1. BAJU (5 Item) ---
+  // ===== JAKET =====
   {
     id: 1,
-    title: "Blouse Pastel Silk Elegan",
-    price: 135000,
-    category: "Pakaian Wanita",
-    description: "Blouse berbahan silk halus dengan nuansa pastel yang nyaman dan anggun untuk dikenakan sehari-hari maupun ke kantor.",
-    image: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 120 }
+    title: "Jaket Parka Hoodie Pink Pastel",
+    price: 185000,
+    category: "Jaket",
+    description: "Jaket ringan berbahan parasut dengan hoodie dalam berbahan jersey abu-abu. Dilengkapi tali serut di tudung dan pinggang, serta karet di pergelangan tangan. Cocok untuk aktivitas harian dan cuaca gerimis.",
+    image: "https://yourimageshare.com/ib/3sWpwTl5pM.jpg",
+    rating: { rate: 4.7, count: 38 }
   },
   {
     id: 2,
-    title: "Kemeja Linen Casual Pria",
-    price: 155000,
-    category: "Pakaian Pria",
-    description: "Kemeja bahan linen premium yang adem dan menyerap keringat, cocok untuk gaya santai maupun semi-formal.",
-    image: "https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.6, count: 95 }
+    title: "Jaket Bomber Suede Coklat Tua",
+    price: 325000,
+    category: "Jaket",
+    description: "Jaket bomber oversize bertekstur suede coklat tua dengan kerah klasik, kancing press, dan lapisan dalam quilted yang hangat. Tampilan elegan dan timeless.",
+    image: "https://yourimageshare.com/ib/nKri5i6qbk.jpg",
+    rating: { rate: 4.8, count: 52 }
   },
   {
     id: 3,
-    title: "Kaos Oversize Cotton Combed",
-    price: 95000,
-    category: "Pakaian Pria",
-    description: "Kaos polos gaya streetwear dengan potongan oversize yang trendi dan sangat nyaman dipakai bersantai.",
-    image: "https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.7, count: 150 }
+    title: "Jaket Kulit Oversize Coklat dengan Sabuk",
+    price: 350000,
+    category: "Jaket",
+    description: "Jaket kulit sintetis model cropped oversize dengan detail sabuk di bagian pinggang dan resleting depan. Gaya kasual yang modis dan mudah dipadukan.",
+    image: "https://yourimageshare.com/ib/Ok2ZJs4ZJ5.jpg",
+    rating: { rate: 4.6, count: 44 }
   },
+
+  // ===== ROK =====
   {
     id: 4,
-    title: "Knitted Crop Top Estetik",
-    price: 115000,
-    category: "Pakaian Wanita",
-    description: "Atasan rajut model crop top dengan rajutan lembut dan motif garis minimalis ala gaya Korea.",
-    image: "https://images.pexels.com/photos/1485031/pexels-photo-1485031.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.5, count: 80 }
+    title: "Rok Panjang A-Line Krem",
+    price: 135000,
+    category: "Rok",
+    description: "Rok panjang model A-line berwarna krem dengan pinggang tinggi dan resleting belakang. Jatuh mengembang dan nyaman dipakai ke kantor maupun acara santai.",
+    image: "https://yourimageshare.com/ib/iLL5qH4uRF.jpg",
+    rating: { rate: 4.7, count: 61 }
   },
   {
     id: 5,
-    title: "Turtleneck Sweater Hangat",
+    title: "Rok Panjang Denim Biru",
     price: 165000,
-    category: "Pakaian Wanita",
-    description: "Sweater rajut dengan kerah tinggi yang memberikan kehangatan ekstra dan kesan chic saat cuaca dingin.",
-    image: "https://images.pexels.com/photos/45982/pexels-photo-45982.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.9, count: 110 }
+    category: "Rok",
+    description: "Rok panjang denim dengan cuci medium blue, potongan lurus, dan saku samping. Tampilan kasual yang cocok dipadukan dengan atasan polos atau kemeja.",
+    image: "https://yourimageshare.com/ib/iJgu2GIgIQ.jpg",
+    rating: { rate: 4.5, count: 36 }
   },
- 
-  // --- 2. CELANA (5 Item) ---
   {
     id: 6,
-    title: "High Waist Wide Leg Jeans",
-    price: 185000,
-    category: "Celana",
-    description: "Celana jeans model wide leg dengan potongan high waist yang membuat kaki terlihat lebih jenjang dan modis.",
-    image: "https://images.pexels.com/photos/1082529/pexels-photo-1082529.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.9, count: 230 }
+    title: "Rok Tiered Panjang Coklat",
+    price: 145000,
+    category: "Rok",
+    description: "Rok maxi berlapis (tiered) berwarna coklat dengan pinggang karet yang nyaman. Bahan jatuh dan adem, cocok untuk gaya feminin sehari-hari.",
+    image: "https://yourimageshare.com/ib/Ia652HovIm.jpg",
+    rating: { rate: 4.8, count: 73 }
   },
+
+  // ===== SANDAL & SEPATU =====
   {
     id: 7,
-    title: "Culottes Pants Cream Pastel",
-    price: 125000,
-    category: "Celana",
-    description: "Celana kulot longgar berbahan katun twill yang lembut, sangat pas dipadukan dengan berbagai blouse.",
-    image: "https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.6, count: 75 }
+    title: "Sandal Slide Suede Dua Strap Taupe",
+    price: 275000,
+    category: "Sandal & Sepatu",
+    description: "Sandal slide dua strap berbahan suede dengan footbed cork yang ergonomis dan buckle logam. Nyaman dipakai seharian.",
+    image: "https://yourimageshare.com/ib/dVdEMZP6CZ.jpg",
+    rating: { rate: 4.9, count: 88 }
   },
   {
     id: 8,
-    title: "Chino Pants Slim Fit Pria",
-    price: 175000,
-    category: "Celana",
-    description: "Celana chino panjang dengan potongan slim fit yang rapi untuk acara formal maupun kasual.",
-    image: "https://images.pexels.com/photos/1300550/pexels-photo-1300550.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.7, count: 140 }
+    title: "Sneakers Retro Krem Strip Coklat",
+    price: 399000,
+    category: "Sandal & Sepatu",
+    description: "Sneakers gaya retro berwarna krem dengan strip coklat dan sol gum. Kombinasi suede dan nilon yang ringan dan stylish.",
+    image: "https://yourimageshare.com/ib/QEQTVlNJ0Q.jpg",
+    rating: { rate: 4.8, count: 97 }
   },
   {
     id: 9,
-    title: "Cargo Jogger Pants Streetwear",
-    price: 145000,
-    category: "Celana",
-    description: "Celana jogger dengan banyak kantong samping khas gaya urban streetwear yang kekinian.",
-    image: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.4, count: 65 }
+    title: "Sandal Mules Hak Pendek Krem",
+    price: 120000,
+    category: "Sandal & Sepatu",
+    description: "Sandal mules ujung lancip dengan strap silang dan hak balok pendek. Elegan, nyaman, dan cocok untuk acara semi formal.",
+    image: "https://yourimageshare.com/ib/jOVrceKKSq.jpg",
+    rating: { rate: 4.6, count: 49 }
   },
   {
     id: 10,
-    title: "Linen Pleated Pants Casual",
-    price: 135000,
-    category: "Celana",
-    description: "Celana bahan linen ringan dengan aksen lipit di bagian depan untuk tampilan rapi tapi tetap santai.",
-    image: "https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 90 }
+    title: "Sneakers Platform Hitam Putih",
+    price: 225000,
+    category: "Sandal & Sepatu",
+    description: "Sneakers platform dengan kombinasi hitam putih dan detail petir di sisi. Sol tebal memberi tambahan tinggi dan tampilan streetwear.",
+    image: "https://yourimageshare.com/ib/t2vfRhCA1J.jpg",
+    rating: { rate: 4.5, count: 41 }
   },
- 
-  // --- 3. SANDAL & SEPATU (5 Item) ---
+
+  // ===== CELANA =====
   {
     id: 11,
-    title: "Sneakers Putih Minimalis Casual",
-    price: 245000,
-    category: "Sandal & Sepatu",
-    description: "Sepatu sneakers putih bersih dengan desain simpel yang cocok dipadukan dengan outfit apa saja.",
-    image: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.9, count: 310 }
+    title: "Celana Jeans Hitam Washed",
+    price: 175000,
+    category: "Celana",
+    description: "Celana jeans hitam dengan efek washed dan cuff di bagian bawah. Bahan denim tebal, awet, dan nyaman dipakai untuk aktivitas harian.",
+    image: "https://yourimageshare.com/ib/RHWtT3XIag.jpg",
+    rating: { rate: 4.6, count: 57 }
   },
   {
     id: 12,
-    title: "Loafers Kulit Sintetis Klasik",
-    price: 195000,
-    category: "Sandal & Sepatu",
-    description: "Sepatu loafers elegan untuk memberikan sentuhan formal yang manis pada penampilan harianmu.",
-    image: "https://images.pexels.com/photos/292999/pexels-photo-292999.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.6, count: 85 }
+    title: "Celana Kulot Pleated Krem",
+    price: 155000,
+    category: "Celana",
+    description: "Celana kulot high waist dengan lipit depan berwarna krem. Potongan lebar yang jatuh rapi, cocok untuk gaya formal maupun kasual.",
+    image: "https://yourimageshare.com/ib/vAJHIwFt1A.jpg",
+    rating: { rate: 4.7, count: 64 }
   },
   {
     id: 13,
-    title: "Platform Sandals Strappy Sage",
-    price: 115000,
-    category: "Sandal & Sepatu",
-    description: "Sandal platform bertali empuk dengan warna hijau sage lembut yang nyaman dipakai jalan-jalan santai.",
-    image: "https://images.pexels.com/photos/336372/pexels-photo-336372.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.7, count: 105 }
+    title: "Celana Cargo Hijau Army",
+    price: 195000,
+    category: "Celana",
+    description: "Celana cargo longgar berwarna hijau army dengan saku samping besar. Bahan katun twill yang kuat dan nyaman untuk gaya streetwear.",
+    image: "https://yourimageshare.com/ib/4ZHZF8Kx7V.jpg",
+    rating: { rate: 4.8, count: 79 }
   },
   {
     id: 14,
-    title: "Slip-On Canvas Shoes Casual",
-    price: 135000,
-    category: "Sandal & Sepatu",
-    description: "Sepatu kanvas tanpa tali yang praktis, ringan, dan sangat nyaman untuk penggunaan harian.",
-    image: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.5, count: 60 }
+    title: "Celana Jeans Wide Leg Biru Muda",
+    price: 210000,
+    category: "Celana",
+    description: "Jeans wide leg dengan warna biru muda dan potongan longgar dari pinggang hingga bawah. Tampilan clean dan trendy.",
+    image: "https://yourimageshare.com/ib/ktfHLdTn6m.jpg",
+    rating: { rate: 4.7, count: 68 }
   },
+
+  // ===== PAKAIAN PRIA =====
   {
     id: 15,
-    title: "Mules Sandals Elegan Cream",
-    price: 125000,
-    category: "Sandal & Sepatu",
-    description: "Sandal mules tertutup di depan dengan hak tipis yang memberikan kesan anggun dan feminin.",
-    image: "https://images.pexels.com/photos/1478477/pexels-photo-1478477.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 130 }
+    title: "Kemeja Pendek Hijau Sage",
+    price: 130000,
+    category: "Pakaian Pria",
+    description: "Kemeja lengan pendek dengan kerah camp berwarna hijau sage, saku dada, dan kancing depan. Bahan adem dan nyaman untuk gaya santai.",
+    image: "https://yourimageshare.com/ib/ggQXH1RsgI.jpg",
+    rating: { rate: 4.6, count: 45 }
   },
- 
-  // --- 4. ROK (5 Item) ---
   {
     id: 16,
-    title: "Midi Skirt Plisket Pastel",
-    price: 115000,
-    category: "Rok",
-    description: "Rok berlipit (plisket) panjang medium dengan bahan jatuh yang anggun dan bebas gerak.",
-    image: "https://images.pexels.com/photos/1007018/pexels-photo-1007018.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 170 }
+    title: "Polo Rajut Hitam Half Zip",
+    price: 165000,
+    category: "Pakaian Pria",
+    description: "Polo rajut lengan pendek berwarna hitam dengan tekstur anyaman dan resleting setengah di bagian depan. Bahan lembut dan adem, tampilan rapi untuk kasual maupun semi formal.",
+    image: "https://yourimageshare.com/ib/gEjiDeJdos.jpg",
+    rating: { rate: 4.7, count: 58 }
   },
+
+  // ===== PAKAIAN WANITA =====
   {
     id: 17,
-    title: "A-Line Denim Skirt Vintage",
-    price: 145000,
-    category: "Rok",
-    description: "Rok jeans model A-line dengan kancing depan bergaya retro vintage era 90-an.",
-    image: "https://images.pexels.com/photos/601316/pexels-photo-601316.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.7, count: 145 }
+    title: "Cardigan Rajut Krem Kancing Emas",
+    price: 155000,
+    category: "Pakaian Wanita",
+    description: "Cardigan rajut kerah bulat berwarna krem dengan kancing depan bernuansa emas. Bahan halus dan hangat, mudah dipadukan dengan rok maupun celana.",
+    image: "https://yourimageshare.com/ib/PyxaD3RutJ.jpg",
+    rating: { rate: 4.8, count: 66 }
   },
   {
     id: 18,
-    title: "Korean High Waist Tennis Skirt",
-    price: 98000,
-    category: "Rok",
-    description: "Rok pendek lipit model tenis ala Korea yang memberikan kesan ceria dan awet muda.",
-    image: "https://images.pexels.com/photos/1381556/pexels-photo-1381556.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.6, count: 115 }
-  },
-  {
-    id: 19,
-    title: "Long Linen Skirt Cream",
-    price: 155000,
-    category: "Rok",
-    description: "Rok panjang bahan linen polos dengan potongan lurus yang anggun dan adem dipakai.",
-    image: "https://images.pexels.com/photos/1755428/pexels-photo-1755428.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.9, count: 95 }
-  },
-  {
-    id: 20,
-    title: "Button-Up Midi Skirt Katun",
-    price: 125000,
-    category: "Rok",
-    description: "Rok midi berbahan katun lembut dilengkapi aksen kancing mati di bagian depan.",
-    image: "https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.5, count: 70 }
-  },
- 
-  // --- 5. JAKET (5 Item) ---
-  {
-    id: 21,
-    title: "Oversize Denim Jacket Vintage",
-    price: 245000,
-    category: "Jaket",
-    description: "Jaket jeans model oversize klasik yang kokoh dan tak pernah lekang oleh waktu.",
-    image: "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.9, count: 280 }
-  },
-  {
-    id: 22,
-    title: "Puffer Jacket Hangat Pastel",
-    price: 275000,
-    category: "Jaket",
-    description: "Jaket tebal berbulu sintetis dengan model puffer yang super empuk dan trendi di musim dingin.",
-    image: "https://images.pexels.com/photos/837140/pexels-photo-837140.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 190 }
-  },
-  {
-    id: 23,
-    title: "Bomber Jacket Casual Pria/Wanita",
-    price: 215000,
-    category: "Jaket",
-    description: "Jaket bomber ringan dengan resleting kuat dan kantong fungsional di bagian lengan.",
-    image: "https://images.pexels.com/photos/16170/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.7, count: 160 }
-  },
-  {
-    id: 24,
-    title: "Knitted Cardigan Oversize Sage",
-    price: 165000,
-    category: "Jaket",
-    description: "Outerwear rajut tebal dengan warna hijau sage yang lembut dan hangat untuk pelengkap OOTD.",
-    image: "https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.8, count: 210 }
-  },
-  {
-    id: 25,
-    title: "Parka Jacket Casual Outdoor",
-    price: 265000,
-    category: "Jaket",
-    description: "Jaket parka tahan angin dengan tudung kepala berbulu, cocok untuk aktivitas luar ruangan.",
-    image: "https://images.pexels.com/photos/6764040/pexels-photo-6764040.jpeg?auto=compress&cs=tinysrgb&w=500",
-    rating: { rate: 4.6, count: 125 }
+    title: "Blouse Peplum Bordir Hijau Sage Muda",
+    price: 175000,
+    category: "Pakaian Wanita",
+    description: "Blouse lengan panjang dengan detail bordir bunga, lengan puff, dan potongan peplum di bagian bawah. Tampilan manis dan feminin untuk acara santai maupun kerja.",
+    image: "https://yourimageshare.com/ib/ZMq5xfsXm1.jpg",
+    rating: { rate: 4.7, count: 47 }
   }
 ];
  
