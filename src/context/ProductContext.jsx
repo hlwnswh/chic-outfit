@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { customOutfitProducts, STORAGE_KEY } from '../services/api';
+import {
+  customOutfitProducts,
+  bacaProdukTersimpan,
+  simpanProduk,
+  STORAGE_KEY,
+} from '../services/api';
 import { fetchProductsFromApi } from '../services/productService';
 
 export const ProductContext = createContext(null);
@@ -9,17 +14,10 @@ export function ProductProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Ambil data produk lokal langsung dari customOutfitProducts (atau localStorage jika ada tambahan baru)
+  // Ambil data lokal dari localStorage (kalau versinya cocok), kalau tidak pakai data awal
   const [localProducts, setLocalProducts] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved !== null) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      }
-    } catch {
-      // abaikan
-    }
+    const tersimpan = bacaProdukTersimpan();
+    if (Array.isArray(tersimpan) && tersimpan.length > 0) return tersimpan;
     return customOutfitProducts;
   });
 
@@ -40,13 +38,9 @@ export function ProductProvider({ children }) {
     muat();
   }, [muat]);
 
-  // Simpan perubahan ke localStorage setiap ada penambahan/penghapusan
+  // Simpan perubahan ke localStorage setiap ada penambahan/penghapusan/edit
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(localProducts));
-    } catch {
-      // abaikan
-    }
+    simpanProduk(localProducts);
   }, [localProducts]);
 
   // Gabungkan produk lokal dan API
