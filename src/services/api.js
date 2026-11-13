@@ -5,7 +5,7 @@ export const STORAGE_KEY = 'chic_outfit_products';
  
 // Naikkan angka ini setiap kali kamu mengganti customOutfitProducts,
 // supaya browser membuang data lama dan memakai data terbaru.
-export const DATA_VERSION = '2';
+export const DATA_VERSION = '5';
 const VERSION_KEY = 'chic_outfit_products_version';
  
 // Data produk awal (dipakai kalau localStorage kosong atau versinya beda)

@@ -1,13 +1,10 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { bacaProdukTersimpan, simpanProduk, STORAGE_KEY } from '../services/api';
+import { fetchLocalProducts, fetchProductsFromApi } from '../services/productService';
 
 export const ProductContext = createContext(null);
 
-// Alamat data produk (file public/products.json) yang diambil lewat fetch
-const API_URL = `${import.meta.env.BASE_URL}products.json`;
-
 export function ProductProvider({ children }) {
-  // Data produk: dari localStorage kalau ada (hasil tambah/edit/hapus), kalau tidak null dulu
   const [localProducts, setLocalProducts] = useState(() => {
     const tersimpan = bacaProdukTersimpan();
     return Array.isArray(tersimpan) && tersimpan.length > 0 ? tersimpan : null;
@@ -15,16 +12,28 @@ export function ProductProvider({ children }) {
   const [loading, setLoading] = useState(localProducts === null);
   const [error, setError] = useState(null);
 
-  // Ambil data dari API (fetch). Dilewati kalau sudah ada data tersimpan, kecuali force = true
+  // Ambil data: produk lokal + produk dari public API (DummyJSON)
   const muat = useCallback(async (force = false) => {
     if (!force && localProducts !== null) return;
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error('Gagal memuat data produk.');
-      const data = await res.json();
-      setLocalProducts(data);
+      const [lokal, api] = await Promise.allSettled([
+        fetchLocalProducts(),
+        fetchProductsFromApi(),
+      ]);
+      const daftarLokal = lokal.status === 'fulfilled' ? lokal.value : [];
+      const daftarApi = api.status === 'fulfilled' ? api.value : [];
+
+      if (daftarLokal.length === 0 && daftarApi.length === 0) {
+        throw new Error('Gagal memuat data produk.');
+      }
+      setLocalProducts([...daftarLokal, ...daftarApi]);
+
+      // Kalau API gagal, katalog tetap tampil dari data lokal + pesan error
+      if (api.status === 'rejected') {
+        setError(api.reason?.message || 'Gagal memuat data dari server.');
+      }
     } catch (err) {
       setError(err.message || 'Gagal memuat data dari server.');
     } finally {
@@ -37,7 +46,6 @@ export function ProductProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Simpan perubahan ke localStorage setiap ada tambah/hapus/edit
   useEffect(() => {
     if (localProducts !== null) simpanProduk(localProducts);
   }, [localProducts]);

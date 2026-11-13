@@ -10,6 +10,7 @@ const KATEGORI_API = {
   'womens-shoes': 'Sandal & Sepatu',
   'mens-shoes': 'Sandal & Sepatu',
 };
+const BATAS_PRODUK = 1; // jumlah produk per kategori dari API
 
 const keRupiah = (usd) => Math.round((usd * KURS) / 1000) * 1000;
 
@@ -28,13 +29,24 @@ const petakan = (p, kategori) => ({
 export async function fetchProductsFromApi() {
   const hasil = await Promise.all(
     Object.entries(KATEGORI_API).map(async ([slug, kategori]) => {
-      const res = await fetch(`${BASE_URL}/${slug}`);
+     const res = await fetch(`${BASE_URL}/${slug}?limit=${BATAS_PRODUK}`);
       if (!res.ok) {
         throw new Error(`Gagal memuat data dari server (kode ${res.status}).`);
       }
-      const data = await res.json();
-      return data.products.map((p) => petakan(p, kategori));
+     const data = await res.json();
+      return data.products.slice(0, BATAS_PRODUK).map((p) => petakan(p, kategori));
     })
   );
-  return hasil.flat();
+  return hasil.flat().slice(0, 3);
+}
+
+// Cadangan: data produk lokal (public/products.json)
+const LOCAL_URL = `${import.meta.env.BASE_URL}products.json`;
+
+export async function fetchLocalProducts() {
+  const res = await fetch(LOCAL_URL);
+  if (!res.ok) throw new Error('Gagal memuat data produk.');
+  const data = await res.json();
+  if (!Array.isArray(data)) throw new Error('Format data produk tidak valid.');
+  return data;
 }
